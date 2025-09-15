@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "twine"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bumblebee-tracking"
+version = "0.0.1"
+description = "Tracking bumblebee behaviour with AI"
+authors = [
+    { name="Jonathan Pattrick" },
+    { name="Hattie Stewart"},
+    { name="Cait Newport"},
+    { name="Dan Schofield"},
+    { name="Jan Christoph Thiele"},
+    { name="Oliver King"},
+    { name="Rachel Parkinson"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+]
+
+[project.urls]
+Repository = "https://github.com/pratorum/Bumblebee_tracking/"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "pytest",
+]
+ci = [
+    "twine",
+    "build",
+    "pytest",
+]
+
+[tool.setuptools]
+packages = ["bumblebee_tracking"]
+include-package-data = true
