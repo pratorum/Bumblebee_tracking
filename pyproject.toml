@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "bumblebee-tracking"
 version = "0.0.1"
-description = "Tracking bumblbee behaviour with AI"
+description = "Tracking bumblebee behaviour with AI"
 authors = [
     { name="Jonathan Pattrick" },
     { name="Hattie Stewart"},
