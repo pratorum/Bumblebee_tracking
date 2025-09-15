@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "twine"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -15,4 +15,27 @@ authors = [
     { name="Oliver King"},
 ]
 readme = "README.md"
-license = { file = "LICENSE" }
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+]
+
+[project.urls]
+Repository = "https://github.com/pratorum/Bumblebee_tracking/"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "pytest",
+]
+ci = [
+    "twine",
+    "build",
+    "pytest",
+]
+
+[tool.setuptools]
+packages = ["bumblebee_tracking"]
+include-package-data = true
