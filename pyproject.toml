@@ -13,6 +13,7 @@ authors = [
     { name="Dan Schofield"},
     { name="Jan Christoph Thiele"},
     { name="Oliver King"},
+    { name="Rachel Parkinson"}
 ]
 readme = "README.md"
 license = {text = "MIT"}
