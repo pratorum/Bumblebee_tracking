@@ -93,7 +93,7 @@ def trim_video(input_path, output_path, start_time, end_time):
     # ffmpeg settings
     command = [
         'ffmpeg',
-        '-hwaccel', 'videotoolbox',
+        #'-hwaccel', 'videotoolbox',
         '-i', str(input_path),
         '-ss', str(start_seconds),  # Start time in seconds
         '-to', str(end_seconds),    # End time in seconds
@@ -129,10 +129,10 @@ def convert_to_seconds(time_str):
 if __name__ == "__main__":
     test_ffmpeg()
 
-    video_path = "/path/to/file.mp4"
-    output_path = "/path/to/output/directory"  # Ensure this is a directory
-    start_time = "00:03:42"
-    end_time = "00:03:50"
+    video_path = "../../Test.mp4"
+    output_path = "../../Output"  # Ensure this is a directory
+    start_time = "00:00:42"
+    end_time = "00:00:50"
 
     get_video_length(video_path)
     check_video(video_path)
