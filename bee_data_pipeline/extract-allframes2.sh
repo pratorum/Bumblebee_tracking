@@ -9,6 +9,8 @@
 # chmod +x extract-allframes2.sh
 # ./extract-allframes2.sh /path/to/input/directory /path/to/output/directory
 
+#MP4 files should be capitalised .MP4 not .mp4
+
 # To run the script, use the following command:
 # ./extract-allframes2.sh /path/to/input/directory /path/to/output/directory
 
