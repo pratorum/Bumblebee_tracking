@@ -23,13 +23,13 @@ pip install -e
 If you want to install the development tools as well, use the following commands if you are are using **bash**:
 
 ```
-pip install -e .[dev, ci]
+pip install -e .[dev]
 ```
 
 If you are using **zsh**:
 
 ```
-pip install -e ".[dev, ci]"
+pip install -e ".[dev]"
 ```
 
 To exit the virtual environment use `deactivate`.

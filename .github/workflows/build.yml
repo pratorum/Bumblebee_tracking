@@ -31,7 +31,7 @@ jobs:
 
     - name: Install dev dependencies
       run: |
-        pip install -e
+        pip install -e .[ci]
 
     - name: Build distributions
       run: |
