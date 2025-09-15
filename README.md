@@ -3,7 +3,7 @@ Tracking and monitoring behaviour of bumblebees with QR codes and YOLO deteciton
 
 
 ## Installation
-*This project requires `Python 3.10` as minimum*
+**This project requires `Python 3.10` as a minimum requirement**
 
 Once you have cloned down this repository using `git clone`, cd into the app directory:
 
@@ -20,13 +20,13 @@ source venv/bin/activate
 pip install -e
 ```
 
-If you want to install the development tools as well, use the following commands if you are are using *bash*:
+If you want to install the development tools as well, use the following commands if you are are using **bash**:
 
 ```
 pip install -e .[dev, ci]
 ```
 
-If you are using *zsh*:
+If you are using **zsh**:
 
 ```
 pip install -e ".[dev, ci]"
