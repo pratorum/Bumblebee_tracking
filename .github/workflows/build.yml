@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      [github-actions, main]
+      [main]
   pull_request:
     branches:
       [main]
