@@ -10,6 +10,11 @@ pip install git+https://github.com/pratorum/Bumblebee_tracking.git
 
 **This project requires `Python 3.10` as minimum**
 
+## Quickstart
+
+```python
+python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --model <path-to-model>
+```
 
 ## Developer Installation
 If you want to contribute to the repository, install as follows:
