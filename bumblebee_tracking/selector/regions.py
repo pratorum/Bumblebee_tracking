@@ -11,7 +11,6 @@
 
 # Import libraries
 import cv2
-import csv
 import os
 import glob
 import numpy as np
