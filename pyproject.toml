@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+[tool.black]
+line-length = 100
+
+>>>>>>> development
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
@@ -20,6 +26,10 @@ license = {text = "MIT"}
 requires-python = ">=3.10"
 dependencies = [
     "numpy",
+<<<<<<< HEAD
+=======
+    "opencv-python"
+>>>>>>> development
 ]
 
 [project.urls]
