@@ -22,11 +22,7 @@ cd Bumblebee_tracking
 
 Create a virtual environment and install the package:
 
-<<<<<<< HEAD
-```
-=======
 ```bash
->>>>>>> development
 python3 -m venv venv
 source venv/bin/activate
 pip install -e
@@ -36,23 +32,12 @@ If you want to create a virtualenv with a specific python version use <path-to-p
 
 If you want to install the development tools as well, use the following commands if you are are using **bash**:
 
-<<<<<<< HEAD
-```
-=======
 ```bash
->>>>>>> development
 pip install -e .[dev]
 ```
 
 If you are using **zsh**:
 
-<<<<<<< HEAD
-```
-pip install -e ".[dev]"
-```
-
-To exit the virtual environment use `deactivate`.
-=======
 ```zsh
 pip install -e ".[dev]"
 ```
@@ -103,4 +88,3 @@ try:
 except ValueError as e:
     print(f"Selection cancelled: {e}")
 ```
->>>>>>> development
