@@ -44,8 +44,6 @@ pip install -e ".[dev]"
 
 To exit the virtual environment use `deactivate`.
 
-## Quickstart
-
 ## User Examples
 ### Select Regions of Interest
 
