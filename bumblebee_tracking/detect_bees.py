@@ -53,11 +53,11 @@ class BeeDetectorApp:
     def validate_args(self):
         """Check that input arguments are valid."""
         if not os.path.isfile(self.args.video):
-            print(f"❌ Video file not found: {self.args.video}")
+            print(f"Video file not found: {self.args.video}")
             sys.exit(1)
 
         if not os.path.isfile(self.args.model):
-            print(f"❌ Model file not found: {self.args.model}")
+            print(f"Model file not found: {self.args.model}")
             sys.exit(1)
 
         os.makedirs(self.args.output, exist_ok=True)
@@ -66,10 +66,10 @@ class BeeDetectorApp:
         """Run the detector with given arguments."""
         self.validate_args()
 
-        print(f"🐝 Starting bee detection on: {self.args.video}")
-        print(f"🔍 Using model: {self.args.model}")
-        print(f"✅ Confidence threshold: {self.args.conf_thresh}")
-        print(f"💾 Output directory: {self.args.output}")
+        print(f"Starting bee detection on: {self.args.video}")
+        print(f"Using model: {self.args.model}")
+        print(f"Confidence threshold: {self.args.conf_thresh}")
+        print(f"Output directory: {self.args.output}")
         if self.args.show:
             print("👀 Display enabled: Will show video while processing")
 
