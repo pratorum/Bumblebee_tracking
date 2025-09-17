@@ -14,10 +14,12 @@ class BeeDetector:
         model_path: str,
         video_path: str,
         conf_thresh: float = 0.25,
+        output_dataframe=None,
     ):
         self.model_path = model_path
         self.video_path = video_path
         self.conf_thresh = conf_thresh
+        self.output_dataframe = output_dataframe
 
     def track_bees_in_video(self):
         """Detect and track bees and save both video and CSV to same directory."""
@@ -75,13 +77,14 @@ class BeeDetector:
         df = pd.DataFrame(rows)
         csv_path = output_dir / f"{video_name}_detections.csv"  # Name CSV after video
         df.to_csv(csv_path, index=False)
+        self.output_dataframe = df
 
         print("Tracking complete!")
         print(f"- Total detections: {len(df)}")
         print(f"- Unique tracks: {df['track_id'].nunique()}")
         print(f"- Results saved to: {output_dir}")
 
-        return df
+        return self.output_dataframe
 
 
 # if __name__ == "__main__":
