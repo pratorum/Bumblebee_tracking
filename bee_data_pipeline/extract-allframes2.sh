@@ -38,7 +38,7 @@ fi
 echo "Extracting frames for videos contained in ${INDIR}"
 
 # Find .mp4 and .h264 files in INDIR and process each
-find "$INDIR" -mindepth 1 -maxdepth 1 -type f \( -name '*.MP4' -o -name '*.h264' \) -print0 | while IFS= read -r -d '' file; do
+find "$INDIR" -mindepth 1 -maxdepth 1 -type f \( -name '*.mp4' -o -name '*.MP4' -o -name '*.h264' \) -print0 | while IFS= read -r -d '' file; do
     filename=$(basename "$file")
     filename_noext="${filename%.*}"
     framedir="$OUTDIR$filename_noext/"
