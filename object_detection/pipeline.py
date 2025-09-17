@@ -12,12 +12,13 @@ def track_bees_in_video(model_path, video_path):
         source=video_path, 
         tracker="bytetrack.yaml",
         save=True,
+        save_frames=True,
         project="results",
         name="bee_tracking",
         stream=True
     )
     
-    # Get output directory from the predictor (much cleaner!)
+    # Get output directory from the predictor
     output_dir = Path(model.predictor.save_dir)
     
     # Extract tracking data
