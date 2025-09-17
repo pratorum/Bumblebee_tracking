@@ -44,5 +44,5 @@ ci = [
 ]
 
 [tool.setuptools]
-packages = ["bumblebee_tracking"]
+packages = ["bumblebee_tracking", "bumblebee_tracking.detector"]
 include-package-data = true
