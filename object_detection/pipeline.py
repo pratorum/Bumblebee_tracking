@@ -4,6 +4,10 @@ from pathlib import Path
 
 def track_bees_in_video(model_path, video_path):
     """Detect and track bees and save both video and CSV to same directory."""
+    model_path = Path(model_path).resolve()
+    video_path = Path(video_path).resolve()
+    assert model_path.exists(), f"Model path {model_path} does not exist."
+    assert video_path.exists(), f"Video path {video_path} does not exist."
     model = YOLO(model_path)
     rows = []
     
