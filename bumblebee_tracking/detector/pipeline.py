@@ -3,20 +3,29 @@ import pandas as pd
 from pathlib import Path
 
 def track_bees_in_video(model_path, video_path):
-    """Track bees and save both video and CSV to same directory."""
+    """Detect and track bees and save both video and CSV to same directory."""
+    model_path = Path(model_path).resolve()
+    video_path = Path(video_path).resolve()
+    assert model_path.exists(), f"Model path {model_path} does not exist."
+    assert video_path.exists(), f"Video path {video_path} does not exist."
     model = YOLO(model_path)
     rows = []
+    
+    # Get video name for consistent naming
+    video_name = Path(video_path).stem  # "Test2_20sec"
     
     # Run tracking - YOLO handles the output directory
     results = model.track(
         source=video_path, 
         tracker="bytetrack.yaml",
         save=True,
+        save_frames=True,
         project="results",
-        name="bee_tracking"
+        name=f"tracking_{video_name}",  # Use video name in folder
+        stream=True
     )
     
-    # Get output directory from the predictor (much cleaner!)
+    # Get output directory from the predictor
     output_dir = Path(model.predictor.save_dir)
     
     # Extract tracking data
@@ -31,14 +40,19 @@ def track_bees_in_video(model_path, video_path):
         
         for (x1, y1, x2, y2), c, k, tid in zip(xyxy, conf, cls, ids):
             rows.append({
-                "frame": frame_idx, "track_id": int(tid), "class_id": int(k),
-                "confidence": float(c), "x1": float(x1), "y1": float(y1), 
+                "video_name": video_name,                    # Add this
+                "frame": frame_idx, 
+                "frame_filename": f"{video_name}_{frame_idx}.jpg",  # Add this
+                "track_id": int(tid), 
+                "class_id": int(k),
+                "confidence": float(c), 
+                "x1": float(x1), "y1": float(y1), 
                 "x2": float(x2), "y2": float(y2)
             })
     
-    # Save CSV to same directory as video
+    # Save CSV with video name
     df = pd.DataFrame(rows)
-    csv_path = output_dir / "detections.csv"
+    csv_path = output_dir / f"{video_name}_detections.csv"  # Name CSV after video
     df.to_csv(csv_path, index=False)
     
     print(f"Tracking complete!")
@@ -49,4 +63,4 @@ def track_bees_in_video(model_path, video_path):
     return df
 
 if __name__ == "__main__":
-    df = track_bees_in_video("../models/rachel_YOLOv8nano_feb25.pt", "../data/Test2_20sec.MP4")
+    df = track_bees_in_video("../models/YOLOv8s_10epochs.pt", "../data/Test2_5sec.MP4")
