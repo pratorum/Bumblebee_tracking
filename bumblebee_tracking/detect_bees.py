@@ -71,9 +71,8 @@ class BeeDetectorApp:
         print(f"Confidence threshold: {self.args.conf_thresh}")
         print(f"Output directory: {self.args.output}")
         if self.args.show:
-            print("👀 Display enabled: Will show video while processing")
+            print("Display enabled: Will show video while processing")
 
-        # Create a detector instance and run detection
         detector = BeeDetector(model_path=self.args.model, conf_thresh=self.args.conf_thresh)
         processor = PostProcessor(data=detector.output_data)
         processor.process()

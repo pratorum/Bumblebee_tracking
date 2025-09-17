@@ -44,6 +44,7 @@ pip install -e ".[dev]"
 
 To exit the virtual environment use `deactivate`.
 
+To run the test suite, use `python -m pytest`.
 ## User Examples
 ### Select Regions of Interest
 
