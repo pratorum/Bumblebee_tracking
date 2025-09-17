@@ -63,4 +63,4 @@ def track_bees_in_video(model_path, video_path):
     return df
 
 if __name__ == "__main__":
-    df = track_bees_in_video("../models/rachel_YOLOv8nano_feb25.pt", "../data/Test2_20sec.MP4")
+    df = track_bees_in_video("../models/YOLOv8s_10epochs.pt", "../data/Test2_5sec.MP4")
