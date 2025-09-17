@@ -7,6 +7,9 @@ def track_bees_in_video(model_path, video_path):
     model = YOLO(model_path)
     rows = []
     
+    # Get video name for consistent naming
+    video_name = Path(video_path).stem  # "Test2_20sec"
+    
     # Run tracking - YOLO handles the output directory
     results = model.track(
         source=video_path, 
@@ -14,7 +17,7 @@ def track_bees_in_video(model_path, video_path):
         save=True,
         save_frames=True,
         project="results",
-        name="bee_tracking",
+        name=f"tracking_{video_name}",  # Use video name in folder
         stream=True
     )
     
@@ -33,14 +36,19 @@ def track_bees_in_video(model_path, video_path):
         
         for (x1, y1, x2, y2), c, k, tid in zip(xyxy, conf, cls, ids):
             rows.append({
-                "frame": frame_idx, "track_id": int(tid), "class_id": int(k),
-                "confidence": float(c), "x1": float(x1), "y1": float(y1), 
+                "video_name": video_name,                    # Add this
+                "frame": frame_idx, 
+                "frame_filename": f"{video_name}_{frame_idx}.jpg",  # Add this
+                "track_id": int(tid), 
+                "class_id": int(k),
+                "confidence": float(c), 
+                "x1": float(x1), "y1": float(y1), 
                 "x2": float(x2), "y2": float(y2)
             })
     
-    # Save CSV to same directory as video
+    # Save CSV with video name
     df = pd.DataFrame(rows)
-    csv_path = output_dir / "detections.csv"
+    csv_path = output_dir / f"{video_name}_detections.csv"  # Name CSV after video
     df.to_csv(csv_path, index=False)
     
     print(f"Tracking complete!")
