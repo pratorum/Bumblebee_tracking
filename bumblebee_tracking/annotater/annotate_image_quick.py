@@ -11,9 +11,7 @@ display_image = image.copy()
 
 # Select first ROI
 print("Select first bounding box...")
-r1 = cv2.selectROI(
-    "Select First ROI", display_image, fromCenter=False, showCrosshair=True
-)
+r1 = cv2.selectROI("Select First ROI", display_image, fromCenter=False, showCrosshair=True)
 
 # r1 returns (x, y, w, h)
 x1, y1, w1, h1 = r1
@@ -31,9 +29,7 @@ x2, y2, w2, h2 = None, None, None, None
 if add_second in ["y", "yes"]:
     # Select second ROI
     print("Select second bounding box...")
-    r2 = cv2.selectROI(
-        "Select Second ROI", display_image, fromCenter=False, showCrosshair=True
-    )
+    r2 = cv2.selectROI("Select Second ROI", display_image, fromCenter=False, showCrosshair=True)
 
     # r2 returns (x, y, w, h)
     x2, y2, w2, h2 = r2
@@ -60,9 +56,7 @@ with open(csv_filename, "a", newline="") as csvfile:
         writer.writeheader()
 
     # Write first bounding box
-    writer.writerow(
-        {"image_path": image_path, "bbox_id": 1, "x": x1, "y": y1, "w": w1, "h": h1}
-    )
+    writer.writerow({"image_path": image_path, "bbox_id": 1, "x": x1, "y": y1, "w": w1, "h": h1})
 
     # Write second bounding box only if it was selected
     if x2 is not None:
