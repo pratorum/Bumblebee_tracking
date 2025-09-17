@@ -17,7 +17,7 @@ import os
 import matplotlib.pyplot as plt
 
 
-def identify_qr_code(image_path, bounding_box=None):
+def identify_qr_code(image_path, bounding_box=None, n_rotatations=0):
     """
     Identify and decode QR codes in an image using AprilTag detection.
     If bounding_box is provided, only search within that region.
@@ -25,6 +25,7 @@ def identify_qr_code(image_path, bounding_box=None):
     Args:
         image_path (str): Path to the image file
         bounding_box (str): Bounding box coordinates as "x1,y1,x2,y2" or None for full image
+        n_rotatations (int): Number of rotations to try for better detection. If > 0, only one tag per bbox/image is assumed. 
 
     Returns:
         list: List of detected QR codes with their data
@@ -69,11 +70,35 @@ def identify_qr_code(image_path, bounding_box=None):
             print(f"Warning: Could not parse bounding box '{bounding_box}': {e}")
             return []
 
+
     # Circle AprilTags use the tagCircle21h7 family
-    detector = Detector(families="tagCircle21h7")
+    detector = Detector(families='tagCircle21h7', quad_decimate=1.0, decode_sharpening=2.0)
+
+    def detect_tags_with_rotations(detector, gray, n_rotatations):
+        """
+        Detect tags in an image, optionally rotating the image to improve detection.
+        Returns the best set of tags found (highest confidence).
+        """
+        import scipy as sp
+        if n_rotatations > 0:
+            confidence = 0.0
+            tags = []
+            for alpha in np.linspace(0, 90, n_rotatations):
+                gray_rot = sp.ndimage.rotate(gray, alpha, mode="nearest", order=5).astype(np.uint8)
+                tags_candidate = detector.detect(gray_rot)
+                if len(tags_candidate) > 0:
+                    if tags_candidate[0].decision_margin > confidence:
+                        print(f"    Found tag {tags_candidate[0].tag_id} with confidence {tags_candidate[0].decision_margin:.2f} at rotation {alpha:.1f} degrees")
+                        confidence = tags_candidate[0].decision_margin
+                        tags = tags_candidate
+            return tags
+        else:
+            return detector.detect(gray)
 
     # Detect tags
-    tags = detector.detect(gray)
+    n_rotatations = 10
+    tags = detect_tags_with_rotations(detector, gray, n_rotatations)
+
 
     results = []
     for tag in tags:
