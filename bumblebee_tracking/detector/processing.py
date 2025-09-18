@@ -8,9 +8,9 @@ class PostProcessor:
         self.data = data
         self.data_dir = data_dir
 
-    def process(self):
+    def process(self, tag_apply_to_tracks=True, tag_save_csv=True):
         """Process output."""
         # Call the tag detection processing function
-        self.data = process_tag_detection(self.data, data_dir=self.data_dir)
+        self.data = process_tag_detection(self.data, data_dir=self.data_dir, apply_to_tracks=tag_apply_to_tracks, save_csv=tag_save_csv)
 
         return self.data
