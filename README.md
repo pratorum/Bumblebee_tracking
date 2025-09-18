@@ -18,7 +18,7 @@ To use the detection algorithm, simply parse your video file to the CLI as below
 python3 -m bumblebee_tracking.detect_bees --video <path-to-video>
 ```
 
-To test with an example video, use `python3 -m bumblebee_tracking.detect_bees --video bumblebee_tracking/test_video.mp4`
+To test with an example video, use `python3 -m bumblebee_tracking.detect_bees --video test`
 
 The detector uses a default trained model, but you can use the `--model` flag to parse the path to model weights file of your choice.
 

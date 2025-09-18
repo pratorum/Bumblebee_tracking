@@ -1,6 +1,7 @@
 """Detect bees in video data with chosen model"""
 
 import argparse
+import importlib.resources
 import os
 import sys
 
@@ -48,16 +49,17 @@ class BeeDetectorApp:
             action="store_true",
             help="Display the video with detections while processing",
         )
-        parser.add_argument(
-            "--analyze",
-            "-a",
-            default=True,
-            help="Perfrom statistical analysis "
-        )
+        parser.add_argument("--analyze", "-a", default=True, help="Perfrom statistical analysis ")
         return parser.parse_args()
 
     def validate_args(self):
         """Check that input arguments are valid."""
+        # Sorry for this horrible hack
+        if self.args.video == "test":
+            self.args.video = importlib.resources.path(
+                "bumblebee_tracking.detector", "example_video.mp4"
+            )
+
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
             sys.exit(1)
