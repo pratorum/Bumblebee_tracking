@@ -75,7 +75,7 @@ class BeeDetectorApp:
 
         detector = BeeDetector(model_path=self.args.model, video_path=self.args.video)
         detector.track_bees_in_video()
-        processor = PostProcessor(data=detector.output_dataframe)
+        processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
         #TODO: add qr identification here
 
