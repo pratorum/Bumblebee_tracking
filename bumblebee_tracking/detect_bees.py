@@ -84,8 +84,8 @@ class BeeDetectorApp:
         processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
 
-        if self.args.model.analyze:
-            analyzer = Analyzer(df=processor.data, output_dir=self.args.output_dir)
+        if self.args.analyze:
+            analyzer = Analyzer(df=processor.data, output_dir=self.args.output)
             analyzer.analyze()
 
 
