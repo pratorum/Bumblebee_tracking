@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from ..qr_identifier.tag_reader import process_tag_detection
+from buzzid.identify.tag_reader import process_tag_detection
 
 
 class PostProcessor:

@@ -5,8 +5,10 @@ import os
 import sys
 
 # TODO: make modules for different processes
-from bumblebee_tracking.detector.models import BeeDetector
-from bumblebee_tracking.detector.processing import Analyzer, PostProcessor
+from buzzid.detect.models import BeeDetector
+from buzzid.detect.processing import Analyzer, PostProcessor
+
+# TODO: set protocol for beetracking with args and --help
 
 
 class BeeDetectorApp:
@@ -25,7 +27,7 @@ class BeeDetectorApp:
             "--model",
             "-m",
             type=str,
-            default="bumblebee_tracking/detector/trained_model.pt",
+            default="buzzid/detect/trained_model.pt",
             help="Path to the YOLO model weights file, defaults to pre-trained model",
         )
         parser.add_argument(
@@ -48,14 +50,14 @@ class BeeDetectorApp:
             action="store_true",
             help="Display the video with detections while processing",
         )
-        parser.add_argument("--analyze", "-a", default=True, help="Perfrom statistical analysis ")
+        parser.add_argument("--analyze", "-a", default=False, help="Perfrom statistical analysis ")
         return parser.parse_args()
 
     def validate_args(self):
         """Check that input arguments are valid."""
         # Sorry for this horrible hack
         if self.args.video == "test":
-            self.args.video = "bumblebee_tracking/detector/example_video.mp4"
+            self.args.video = "buzzid/detect/example_video.mp4"
 
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
@@ -88,6 +90,7 @@ class BeeDetectorApp:
             analyzer.analyze()
 
 
-if __name__ == "__main__":
+def main():
+    """Function to be run as 'buzzid' in pyproject.toml"""
     app = BeeDetectorApp()
     app.run()

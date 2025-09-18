@@ -18,13 +18,13 @@ def invalid_model():
 @pytest.fixture
 def valid_video():
     """Fixture for video file."""
-    return "bumblebee_tracking/tests/test_video.mp4"
+    return "buzzid/tests/test_video.mp4"
 
 
 @pytest.fixture
 def valid_model():
     """Fixture for model file."""
-    return "bumblebee_tracking/tests/test_model.mp4"
+    return "buzzid/tests/test_model.mp4"
 
 
 @pytest.fixture
