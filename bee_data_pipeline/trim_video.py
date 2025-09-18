@@ -129,10 +129,10 @@ def convert_to_seconds(time_str):
 if __name__ == "__main__":
     test_ffmpeg()
 
-    video_path = "../../../QR_code_videos/Test3.mp4"
+    video_path = "../../../QR_code_videos/qpi4_Test_7.mp4"
     output_path = "../../../QR_code_videos/Output"  # Ensure this is a directory
-    start_time = "03:43:55"
-    end_time = "03:53:55"
+    start_time = "01:56:20"
+    end_time = "02:04:20"
 
     get_video_length(video_path)
     check_video(video_path)

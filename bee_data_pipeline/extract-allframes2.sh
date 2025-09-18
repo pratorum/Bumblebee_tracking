@@ -56,9 +56,13 @@ find "$INDIR" -mindepth 1 -maxdepth 1 -type f \( -name '*.MP4' -o -name '*.h264'
             continue
         fi
 
+        #Set desired frame rate (e.g., 30 fps)
+        #FRAME_RATE=30 # Used with the changes below to stop frame duplication - but doesn't work
+
         # Build ffmpeg command with frame selection parameters
         FFMPEG_CMD="ffmpeg -nostdin -i \"$file\" -vsync 0 -frame_pts true -qscale:v 2"
-        
+        #FFMPEG_CMD="ffmpeg -nostdin -r $FRAME_RATE -i \"$file\" -vsync 0 -frame_pts true -qscale:v 2" #modification to suupposedly stop frame duplication
+
         # Add start frame if specified
         if [ "$START_FRAME" -gt 0 ]; then
             FFMPEG_CMD="$FFMPEG_CMD -start_number $START_FRAME"
