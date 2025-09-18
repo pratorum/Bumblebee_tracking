@@ -6,7 +6,7 @@ import sys
 
 # TODO: make modules for different processes
 from bumblebee_tracking.detector.models import BeeDetector
-from bumblebee_tracking.detector.processing import PostProcessor
+from bumblebee_tracking.detector.processing import Analyzer, PostProcessor
 
 
 class BeeDetectorApp:
@@ -48,6 +48,12 @@ class BeeDetectorApp:
             action="store_true",
             help="Display the video with detections while processing",
         )
+        parser.add_argument(
+            "--analyze",
+            "-a",
+            default=True,
+            help="Perfrom statistical analysis "
+        )
         return parser.parse_args()
 
     def validate_args(self):
@@ -77,7 +83,10 @@ class BeeDetectorApp:
         detector.track_bees_in_video()
         processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
-        #TODO: add qr identification here
+
+        if self.args.model.analyze:
+            analyzer = Analyzer(df=processor.data, output_dir=self.args.output_dir)
+            analyzer.analyze()
 
 
 if __name__ == "__main__":
