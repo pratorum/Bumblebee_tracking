@@ -78,6 +78,7 @@ def process_tag_detection(
     save_csv=True,
     n_rotations=10,
     min_bbox_size=5,
+    min_confidence=100.0,
     data_dir=None,
 ):
 
@@ -98,7 +99,7 @@ def process_tag_detection(
         bb_img = img[int(row['y1']):int(row['y2']), int(row['x1']):int(row['x2'])]
         gray = cv2.cvtColor(bb_img, cv2.COLOR_BGR2GRAY)
         tags = detect_tags_with_rotations(gray, n_rotations)
-        if len(tags) > 0:
+        if len(tags) > 0 and tags[0].decision_margin >= min_confidence:
             row['tag_id'] = tags[0].tag_id
             row['tag_confidence'] = tags[0].decision_margin
             df.loc[idx] = row
