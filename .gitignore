@@ -207,12 +207,12 @@ marimo/_lsp/
 __marimo__/
 
 # Media files
-data/
-*.h264
-*.mp4
-*.avi
-*.mov
-*.MP4
+# data/
+# *.h264
+# *.mp4
+# *.avi
+# *.mov
+# *.MP4
 
 #Mac OS
 .DS_Store

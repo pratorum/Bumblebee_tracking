@@ -36,6 +36,7 @@ Repository = "https://github.com/pratorum/Bumblebee_tracking/"
 
 [project.optional-dependencies]
 dev = [
+    "build",
     "black",
     "flake8",
     "pytest",
@@ -47,8 +48,13 @@ ci = [
 ]
 
 [tool.setuptools]
-packages = ["bumblebee_tracking", "bumblebee_tracking.detector"]
+packages = [
+    "bumblebee_tracking",
+    "bumblebee_tracking.detector",
+    "bumblebee_tracking.qr_identifier",
+    "bumblebee_tracking.annotater",
+    ]
 include-package-data = true
 
 [tool.setuptools.package-data]
-"bumblebee_tracking.detector" = ["trained_model.pt"]
+"bumblebee_tracking.detector" = ["trained_model.pt", "example_video.mp4"]
