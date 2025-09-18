@@ -28,6 +28,7 @@ dependencies = [
     "opencv-python>=4.8.0",
     "ultralytics>=8.0.0",
     "pandas>=2.0.0",
+    "tqdm",
 ]
 
 [project.urls]
@@ -48,3 +49,6 @@ ci = [
 [tool.setuptools]
 packages = ["bumblebee_tracking", "bumblebee_tracking.detector"]
 include-package-data = true
+
+[tool.setuptools.package-data]
+"bumblebee_tracking.detector" = ["trained_model.pt"]

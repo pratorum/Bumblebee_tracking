@@ -25,8 +25,8 @@ class BeeDetectorApp:
             "--model",
             "-m",
             type=str,
-            default="models/yolov5_bees.pt",  # TODO: update to default yolo model
-            help="Path to the YOLO model weights file",  # TODO: toggle models somehow
+            default="bumblebee_tracking/detector/trained_model.pt",
+            help="Path to the YOLO model weights file, defaults to pre-trained model",
         )
         parser.add_argument(
             "--conf-thresh",
