@@ -25,7 +25,9 @@ dependencies = [
     "numpy",
     "scipy",
     "pupil-apriltags",
-    "opencv-python"
+    "opencv-python>=4.8.0",
+    "ultralytics>=8.0.0",
+    "pandas>=2.0.0",
 ]
 
 [project.urls]
@@ -44,5 +46,5 @@ ci = [
 ]
 
 [tool.setuptools]
-packages = ["bumblebee_tracking"]
+packages = ["bumblebee_tracking", "bumblebee_tracking.detector"]
 include-package-data = true

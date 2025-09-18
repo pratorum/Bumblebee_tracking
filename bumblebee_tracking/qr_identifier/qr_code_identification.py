@@ -46,9 +46,7 @@ def identify_qr_code(image_path, bounding_box=None, n_rotatations=0):
             # Parse bounding box coordinates
             coords = [int(x.strip()) for x in bounding_box.split(",")]
             if len(coords) != 4:
-                print(
-                    f"Warning: Invalid bounding box format: {bounding_box}. Expected x1,y1,x2,y2"
-                )
+                print(f"Warning: Invalid bounding box format: {bounding_box}. Expected x1,y1,x2,y2")
                 return []
 
             x1, y1, x2, y2 = coords
@@ -105,8 +103,7 @@ def identify_qr_code(image_path, bounding_box=None, n_rotatations=0):
         # Adjust coordinates back to original image space if we cropped
         adjusted_center = (tag.center[0] + crop_offset_x, tag.center[1] + crop_offset_y)
         adjusted_corners = [
-            (corner[0] + crop_offset_x, corner[1] + crop_offset_y)
-            for corner in tag.corners
+            (corner[0] + crop_offset_x, corner[1] + crop_offset_y) for corner in tag.corners
         ]
 
         # Extract tag data
@@ -208,9 +205,7 @@ def visualize_detection(image_path, bounding_boxes, detected_tags, save_path=Non
     legend_elements = []
     for i, bbox in enumerate(bounding_boxes):
         color = colors[i % len(colors)]
-        legend_elements.append(
-            plt.Rectangle((0, 0), 1, 1, color=color, label=f"BBox {i+1}")
-        )
+        legend_elements.append(plt.Rectangle((0, 0), 1, 1, color=color, label=f"BBox {i+1}"))
     legend_elements.append(
         plt.Line2D(
             [0],
@@ -378,9 +373,7 @@ def process_images_from_csv(csv_file_path):
                     for j, qr in enumerate(qr_codes):
                         print(f"      QR Code {j+1}:")
                         print(f"        ID: {qr['tag_id']}")
-                        print(
-                            f"        Center: ({qr['center'][0]:.2f}, {qr['center'][1]:.2f})"
-                        )
+                        print(f"        Center: ({qr['center'][0]:.2f}, {qr['center'][1]:.2f})")
                         print(f"        Decoded Data: {qr['data']}")
                     all_detected_tags.extend(qr_codes)
                 else:
@@ -391,9 +384,7 @@ def process_images_from_csv(csv_file_path):
                 print(f"\n  Creating visualization...")
                 base_name = os.path.splitext(os.path.basename(image_path))[0]
                 save_path = f"detection_visualization_{base_name}.png"
-                visualize_detection(
-                    image_path, bounding_boxes, all_detected_tags, save_path
-                )
+                visualize_detection(image_path, bounding_boxes, all_detected_tags, save_path)
 
 
 def visualize_single_image(image_path, csv_file_path="bounding_boxes.csv"):
@@ -508,14 +499,10 @@ def visualize_single_image(image_path, csv_file_path="bounding_boxes.csv"):
                             qr_codes = identify_qr_code(image_path, bbox)
                             if qr_codes:
                                 all_detected_tags.extend(qr_codes)
-                                print(
-                                    f"  Found {len(qr_codes)} QR code(s) in bbox{bbox_num}"
-                                )
+                                print(f"  Found {len(qr_codes)} QR code(s) in bbox{bbox_num}")
                             bbox_num += 1
                         except ValueError:
-                            print(
-                                f"Warning: Could not parse bbox{bbox_num} coordinates"
-                            )
+                            print(f"Warning: Could not parse bbox{bbox_num} coordinates")
                             break
                     else:
                         break
@@ -524,9 +511,7 @@ def visualize_single_image(image_path, csv_file_path="bounding_boxes.csv"):
                 if bounding_boxes:
                     base_name = os.path.splitext(os.path.basename(image_path))[0]
                     save_path = f"visualization_{base_name}.png"
-                    visualize_detection(
-                        image_path, bounding_boxes, all_detected_tags, save_path
-                    )
+                    visualize_detection(image_path, bounding_boxes, all_detected_tags, save_path)
                 else:
                     print("No valid bounding boxes found for this image")
                 return
@@ -548,9 +533,7 @@ def main():
         process_images_from_csv(csv_file)
     else:
         print(f"CSV file '{csv_file}' not found.")
-        print(
-            "Please ensure the bounding_boxes.csv file exists in the current directory."
-        )
+        print("Please ensure the bounding_boxes.csv file exists in the current directory.")
 
 
 if __name__ == "__main__":
