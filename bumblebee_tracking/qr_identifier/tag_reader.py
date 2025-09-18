@@ -106,13 +106,12 @@ def process_tag_detection(
 
     return df
 
-def main():
+def main(csv_file=None):
     # %%
-    csv_file = Path(r"/Users/christoph/Developer/Beetracking/Bumblebee_tracking/object_detection/results/tracking_Test2_20sec/Test2_20sec_detections.csv")
-
-    apply_to_tracks = True
-    save_csv = True
-    df = process_tag_detection(csv_file, apply_to_tracks=apply_to_tracks, save_csv=save_csv)
+    if csv_file is not None:
+        apply_to_tracks = True
+        save_csv = True
+        df = process_tag_detection(csv_file, apply_to_tracks=apply_to_tracks, save_csv=save_csv)
 
 #%%
 if __name__ == "__main__":
