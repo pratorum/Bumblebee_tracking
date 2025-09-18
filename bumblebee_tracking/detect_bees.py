@@ -36,6 +36,13 @@ class BeeDetectorApp:
             help="Confidence threshold for detections (0.0 to 1.0)",
         )
         parser.add_argument(
+            "--iou-thresh",
+            "-i",
+            type=float,
+            default=0.70,
+            help="NMS IoU threshold - lower to reduce overlapping boxes (0.0 to 1.0)",
+        )
+        parser.add_argument(
             "--output",
             "-o",
             type=str,
@@ -69,11 +76,12 @@ class BeeDetectorApp:
         print(f"Starting bee detection on: {self.args.video}")
         print(f"Using model: {self.args.model}")
         print(f"Confidence threshold: {self.args.conf_thresh}")
+        print(f"NMS IoU threshold: {self.args.iou_thresh}")
         print(f"Output directory: {self.args.output}")
         if self.args.show:
             print("👀 Display enabled: Will show video while processing")
 
-        detector = BeeDetector(model_path=self.args.model, video_path=self.args.video, conf_thresh=self.args.conf_thresh)
+        detector = BeeDetector(model_path=self.args.model, video_path=self.args.video, conf_thresh=self.args.conf_thresh, iou_thresh=self.args.iou_thresh)
         detector.track_bees_in_video()
         processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()

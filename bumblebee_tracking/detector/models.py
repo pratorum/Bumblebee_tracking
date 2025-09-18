@@ -14,11 +14,13 @@ class BeeDetector:
         model_path: str,
         video_path: str,
         conf_thresh: float = 0.25,
+        iou_thresh: float = 0.70,
         output_dataframe=None,
     ):
         self.model_path = model_path
         self.video_path = video_path
         self.conf_thresh = conf_thresh
+        self.iou_thresh = iou_thresh
         self.output_dataframe = output_dataframe
         self.output_dir = None
 
@@ -44,6 +46,7 @@ class BeeDetector:
             name=f"tracking_{video_name}",  # Use video name in folder
             stream=True,
             conf=self.conf_thresh,
+            iou=self.iou_thresh,
         )
 
         # Get output directory from the predictor
