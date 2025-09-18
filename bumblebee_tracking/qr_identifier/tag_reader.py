@@ -106,10 +106,20 @@ def process_tag_detection(
             tqdm.write(f"Frame {frame}: Detected tag {tags[0].tag_id} with confidence {tags[0].decision_margin:.2f}")
 
     if apply_to_tracks and 'track_id' in df.columns:
-        best_tags = df.loc[df.groupby('track_id')['tag_confidence'].idxmax()][['track_id', 'tag_id', 'tag_confidence']]
-        best_tags = best_tags.set_index('track_id')
+        min_counts = 3
+        def select_most_frequent_tag(group):
+            tag_counts = group['tag_id'].value_counts()
+            tag_id = -1
+            if not tag_counts.empty and tag_counts.iloc[0] >= min_counts and tag_counts.index[0] != -1:
+                tag_id = tag_counts.index[0]
+            return pd.Series({
+                'tag_id': tag_id
+            })
+
+        # Get the most frequent tag_id for each track_id (if it appears at least min_counts times)
+        best_tags = df.groupby('track_id').apply(select_most_frequent_tag)
+        # Map the selected tag_id back to the dataframe
         df['tag_id'] = df['track_id'].map(best_tags['tag_id'])
-        df['tag_confidence'] = df['track_id'].map(best_tags['tag_confidence'])
 
     if save_csv and output_csv_file is not None:
         df.to_csv(output_csv_file, index=False)
