@@ -12,9 +12,15 @@ pip install git+https://github.com/pratorum/Bumblebee_tracking.git
 
 ## Quickstart
 
+To use the detection algorithm, simply parse your video file to the CLI as below:
+
 ```python
-python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --model <path-to-model>
+python3 -m bumblebee_tracking.detect_bees --video <path-to-video>
 ```
+
+To test with an example video, use `python3 -m bumblebee_tracking.detect_bees --video bumblebee_tracking/test_video.mp4`
+
+The detector uses a default trained model, but you can use the `--model` flag to parse the path to model weights file of your choice.
 
 ## Developer Installation
 If you want to contribute to the repository, install as follows:
@@ -48,6 +54,8 @@ pip install -e ".[dev]"
 ```
 
 To exit the virtual environment use `deactivate`.
+
+To run the test suite, use `python -m pytest`.
 
 ## User Examples
 ### Select Regions of Interest
