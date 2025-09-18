@@ -1,7 +1,6 @@
 """Detect bees in video data with chosen model"""
 
 import argparse
-import importlib.resources
 import os
 import sys
 
@@ -56,9 +55,7 @@ class BeeDetectorApp:
         """Check that input arguments are valid."""
         # Sorry for this horrible hack
         if self.args.video == "test":
-            self.args.video = importlib.resources.path(
-                "bumblebee_tracking.detector", "example_video.mp4"
-            )
+            self.args.video = "bumblebee_tracking/detector/example_video.mp4"
 
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
