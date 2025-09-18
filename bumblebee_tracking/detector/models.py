@@ -43,6 +43,7 @@ class BeeDetector:
             project="results",
             name=f"tracking_{video_name}",  # Use video name in folder
             stream=True,
+            conf=self.conf_thresh,
         )
 
         # Get output directory from the predictor

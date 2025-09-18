@@ -73,7 +73,7 @@ class BeeDetectorApp:
         if self.args.show:
             print("👀 Display enabled: Will show video while processing")
 
-        detector = BeeDetector(model_path=self.args.model, video_path=self.args.video)
+        detector = BeeDetector(model_path=self.args.model, video_path=self.args.video, conf_thresh=self.args.conf_thresh)
         detector.track_bees_in_video()
         processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
