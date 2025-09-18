@@ -206,6 +206,15 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# MacOS
+# Media files
+data/
+*.h264
+*.mp4
+*.avi
+*.mov
+*.MP4
+
+#Mac OS
 .DS_Store
 *.DS_Store
+bumblebee_tracking/qr_identifier/test_example_tag.py

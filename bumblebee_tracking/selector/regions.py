@@ -17,9 +17,7 @@ import numpy as np
 
 
 # Create a function that allows the user to select the regions of interest from an image.
-def select_regions_of_interest(
-    image_path, image_number=1, save_with_roi=False, output_path=None
-):
+def select_regions_of_interest(image_path, image_number=1, save_with_roi=False, output_path=None):
     """
     Select regions of interest from an image or folder of images.
 
@@ -190,9 +188,7 @@ def select_regions_of_interest(
 
     # Save image with ROI if requested
     if save_with_roi:
-        saved_path = save_image_with_roi(
-            image_path, (x1, y1, w1, h1), output_path, image_number
-        )
+        saved_path = save_image_with_roi(image_path, (x1, y1, w1, h1), output_path, image_number)
         return (x1, y1, w1, h1), saved_path
 
     # Return the regions of interest
@@ -255,9 +251,7 @@ def save_image_with_roi(image_path, roi, output_path=None, image_number=1):
 
     # Add text label
     label = f"ROI: ({x}, {y}, {width}, {height})"
-    cv2.putText(
-        image, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2
-    )
+    cv2.putText(image, label, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
     # Create sidebar for saved image
     sidebar_width = 300

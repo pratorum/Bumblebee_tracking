@@ -73,13 +73,11 @@ class BeeDetectorApp:
         if self.args.show:
             print("Display enabled: Will show video while processing")
 
-        detector = BeeDetector(model_path=self.args.model, conf_thresh=self.args.conf_thresh)
-        processor = PostProcessor(data=detector.output_data)
+        detector = BeeDetector(model_path=self.args.model, video_path=self.args.video)
+        detector.track_bees_in_video()
+        processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
-
-        detector.detect(
-            video_path=self.args.video, output_dir=self.args.output, show=self.args.show
-        )
+        #TODO: add qr identification here
 
 
 if __name__ == "__main__":
