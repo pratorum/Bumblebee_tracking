@@ -34,20 +34,29 @@ def detect_tags_with_rotations(gray, n_rotatations, print=False):
 
 
 # %%
-def load_detection_csv(csv_file):
-    df = pd.read_csv(csv_file)
-    if len(df) == 0:
-        return df, {}
-
-    frame_dir = Path(csv_file).parent / (df.loc[0,"video_name"] + "_frames")
+def load_detection(csv_file, data_dir=None):
+    if isinstance(csv_file, (str, Path)):
+        df = pd.read_csv(csv_file)
+        if len(df) == 0:
+            return df, {}, None
+        if data_dir is None:
+            data_dir = Path(csv_file).parent
+        frame_dir = data_dir / (df.loc[0,"video_name"] + "_frames")
+    elif isinstance(csv_file, pd.DataFrame):
+        df = csv_file
+        if len(df) == 0:
+            return df, {}, None
+        if data_dir is None:
+            raise ValueError("data_dir must be provided when loading from dataframe")
+        frame_dir = Path(data_dir) / (df.loc[0,"video_name"] + "_frames")
     assert frame_dir.exists(), f"Frame directory {frame_dir} does not exist."
     
     img_path = {
         int(group_name): frame_dir / row["frame_filename"]
         for group_name, row in df.groupby('frame').first().iterrows()
     }
-
-    return df, img_path
+    output_csv_file = data_dir / (df.loc[0,"video_name"] + "_detections_tagged.csv")
+    return df, img_path, output_csv_file
 
 #%% get image, use a chache to avoid reloading
 def get_image(source, idx):
@@ -64,13 +73,15 @@ def get_image(source, idx):
     return img
 # %%
 def process_tag_detection(
-    csv_file,
+    csv_fileORdataframe,
     apply_to_tracks=True,
     save_csv=True,
     n_rotations=10,
     min_bbox_size=5,
+    data_dir=None,
 ):
-    df, img_path = load_detection_csv(csv_file)
+
+    df, img_path, output_csv_file = load_detection(csv_fileORdataframe, data_dir=data_dir)
 
     # add column for tag id and tag confidence
     df['tag_id'] = -1
@@ -99,10 +110,9 @@ def process_tag_detection(
         df['tag_id'] = df['track_id'].map(best_tags['tag_id'])
         df['tag_confidence'] = df['track_id'].map(best_tags['tag_confidence'])
 
-    if save_csv:
-        out_csv_file = csv_file.parent / (csv_file.stem + "_tagged.csv")
-        df.to_csv(out_csv_file, index=False)
-        print(f"Saved updated CSV with tags to {out_csv_file}")
+    if save_csv and output_csv_file is not None:
+        df.to_csv(output_csv_file, index=False)
+        print(f"Saved updated CSV with tags to {output_csv_file}")
 
     return df
 

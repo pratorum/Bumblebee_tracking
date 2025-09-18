@@ -10,4 +10,7 @@ class PostProcessor:
 
     def process(self):
         """Process output."""
+        # Call the tag detection processing function
+        self.data = process_tag_detection(self.data, data_dir=self.data_dir)
+
         return self.data
