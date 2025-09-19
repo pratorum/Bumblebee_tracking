@@ -1,5 +1,6 @@
 import re
 import datetime
+from collections import Counter
 import numpy as np
 import scipy as sp
 import cv2
@@ -69,7 +70,6 @@ def validate_and_interpolate_timestamps(
 	Given a dict of OCR results (as from extract_timestamp_from_image),
 	validates and interpolates timestamps.
 	"""
-	from collections import Counter
 	def most_common(lst):
 		return Counter(lst).most_common(1)[0][0]
 	prefix_common = most_common(timestamps['prefix'])
