@@ -15,7 +15,7 @@ To activate the environment, use:
 source venv/bin/activate
 ```
 
-Use `deactivate` to leave the enironment.
+Use `deactivate` to leave the environment.
 
 **This project requires `Python3.10` as minimum, please ensure you are using `Python3.10` or higher**
 
