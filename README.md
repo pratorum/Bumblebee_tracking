@@ -13,7 +13,7 @@ pip install git+https://github.com/pratorum/Bumblebee_tracking.git
 ## Quickstart
 
 ```python
-python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --model <path-to-model> --conf-thresh <0.35> --iou-thresh <0.60>
+python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --model <path-to-model> --conf-thresh <thresh-value> --iou-thresh <thresh-value>
 ```
 
 ## Developer Installation
