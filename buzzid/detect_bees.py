@@ -14,6 +14,12 @@ class BeeDetectorApp:
     def __init__(self):
         self.args = self.parse_args()
 
+    @staticmethod
+    def _get_data(path):
+        """Private function to fix path for package data."""
+        _ROOT = os.path.abspath(os.path.dirname(__file__))
+        return os.path.join(_ROOT, path)
+
     def parse_args(self):
         """argument parser for CLI."""
         parser = argparse.ArgumentParser(description="Bee Detection in Videos using YOLO")
@@ -24,7 +30,7 @@ class BeeDetectorApp:
             "--model",
             "-m",
             type=str,
-            default="buzzid/detect/trained_model.pt",
+            default=self._get_data("detect/trained_model.pt"),
             help="Path to the YOLO model weights file, defaults to pre-trained model",
         )
         parser.add_argument(
@@ -48,7 +54,7 @@ class BeeDetectorApp:
         """Check that input arguments are valid."""
         # Sorry for this horrible hack
         if self.args.video == "test":
-            self.args.video = "buzzid/detect/example_video.mp4"
+            self.args.video = self._get_data("detect/example_video.mp4")
 
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
