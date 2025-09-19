@@ -44,13 +44,7 @@ class BeeDetectorApp:
             default="outputs/",
             help="Directory to save output results (frames, video, etc.)",
         )
-        parser.add_argument(
-            "--show",
-            "-s",
-            action="store_true",
-            help="Display the video with detections while processing",
-        )
-        parser.add_argument("--analyze", "-a", default=False, help="Perfrom statistical analysis ")
+        parser.add_argument("--analyze", "-a", action="store_true", help="Perfrom statistical analysis ")
         return parser.parse_args()
 
     def validate_args(self):
@@ -77,8 +71,6 @@ class BeeDetectorApp:
         print(f"Using model: {self.args.model}")
         print(f"Confidence threshold: {self.args.conf_thresh}")
         print(f"Output directory: {self.args.output}")
-        if self.args.show:
-            print("Display enabled: Will show video while processing")
 
         detector = BeeDetector(model_path=self.args.model, video_path=self.args.video)
         detector.track_bees_in_video()
