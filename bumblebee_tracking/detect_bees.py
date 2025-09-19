@@ -6,7 +6,7 @@ import sys
 
 # TODO: make modules for different processes
 from bumblebee_tracking.detector.models import BeeDetector
-from bumblebee_tracking.detector.processing import PostProcessor
+from bumblebee_tracking.detector.processing import Analyzer, PostProcessor
 
 
 class BeeDetectorApp:
@@ -25,8 +25,8 @@ class BeeDetectorApp:
             "--model",
             "-m",
             type=str,
-            default="models/yolov5_bees.pt",  # TODO: update to default yolo model
-            help="Path to the YOLO model weights file",  # TODO: toggle models somehow
+            default="bumblebee_tracking/detector/trained_model.pt",
+            help="Path to the YOLO model weights file, defaults to pre-trained model",
         )
         parser.add_argument(
             "--conf-thresh",
@@ -55,10 +55,15 @@ class BeeDetectorApp:
             action="store_true",
             help="Display the video with detections while processing",
         )
+        parser.add_argument("--analyze", "-a", default=True, help="Perfrom statistical analysis ")
         return parser.parse_args()
 
     def validate_args(self):
         """Check that input arguments are valid."""
+        # Sorry for this horrible hack
+        if self.args.video == "test":
+            self.args.video = "bumblebee_tracking/detector/example_video.mp4"
+
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
             sys.exit(1)
@@ -79,13 +84,16 @@ class BeeDetectorApp:
         print(f"NMS IoU threshold: {self.args.iou_thresh}")
         print(f"Output directory: {self.args.output}")
         if self.args.show:
-            print("👀 Display enabled: Will show video while processing")
+            print("Display enabled: Will show video while processing")
 
         detector = BeeDetector(model_path=self.args.model, video_path=self.args.video, conf_thresh=self.args.conf_thresh, iou_thresh=self.args.iou_thresh)
         detector.track_bees_in_video()
         processor = PostProcessor(data=detector.output_dataframe, data_dir=detector.output_dir)
         processor.process()
-        #TODO: add qr identification here
+
+        if self.args.analyze:
+            analyzer = Analyzer(df=processor.data, output_dir=self.args.output)
+            analyzer.analyze()
 
 
 if __name__ == "__main__":

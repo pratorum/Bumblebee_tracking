@@ -90,7 +90,3 @@ class BeeDetector:
         print(f"- Results saved to: {self.output_dir}")
 
         return self.output_dataframe
-
-
-# if __name__ == "__main__":
-#     df = track_bees_in_video("../models/YOLOv8s_10epochs.pt", "../data/Test2_5sec.MP4")
