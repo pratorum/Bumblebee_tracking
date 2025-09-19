@@ -91,6 +91,8 @@ class BeeDetectorApp:
         if self.args.analyze:
             analyzer = Analyzer(df=processor.data, output_dir=self.args.output)
             analyzer.analyze()
+        
+        print(f"Detection complete! Output files saved to {self._get_data(self.args.output)}")
 
 
 def main():
