@@ -19,11 +19,19 @@ class PostProcessor:
     def process(self, tag_apply_to_tracks=True, tag_save_csv=True, read_timestamps=True):
         """Process output."""
         # Call the tag detection processing function
-        self.data = process_tag_detection(self.data, data_dir=self.data_dir, apply_to_tracks=tag_apply_to_tracks, save_csv=tag_save_csv)
+        try:
+            self.data = process_tag_detection(self.data, data_dir=self.data_dir, apply_to_tracks=tag_apply_to_tracks, save_csv=tag_save_csv)
+        except:
+            print("Skipping tag identification")
+            return self.data
 
-        if read_timestamps:
-            self.data = add_timestamps_to_dataframe(self.data, data_dir=self.data_dir)
-        return self.data
+        try:
+            if read_timestamps:
+                self.data = add_timestamps_to_dataframe(self.data, data_dir=self.data_dir)
+            return self.data
+        except:
+            print("Skipping reading timestamps")
+            return self.data
 
 
 class Analyzer:
