@@ -6,7 +6,6 @@ import sys
 
 from buzzid.detect.models import BeeDetector
 from buzzid.detect.processing import Analyzer, PostProcessor
-from buzzid.annotate.correct_annotations import correct_annotations
 
 
 class BeeDetectorApp:
@@ -56,7 +55,6 @@ class BeeDetectorApp:
             help="Directory to save output results (frames, video, etc.)",
         )
         parser.add_argument("--analyze", "-a", action="store_true", help="Perfrom statistical analysis on results")
-        parser.add_argument("--interactive", "-i", action="store_true", help="Run BuzzID in interactive mode to update selected regions")
         return parser.parse_args()
 
     def validate_args(self):
