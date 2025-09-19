@@ -35,7 +35,7 @@ def detect_tags_with_rotations(gray: np.ndarray, n_rotatations: int, print: bool
         return detector.detect(gray)
 
 
-def load_detection(csv_file, data_dir=None) -> tuple:
+def load_detection(csv_file, data_dir=None, suffix="_tagged") -> tuple:
     """
     Load detection data from a CSV file or DataFrame and return the DataFrame, a mapping from frame to image path, and the output CSV path.
     """
@@ -59,7 +59,7 @@ def load_detection(csv_file, data_dir=None) -> tuple:
         int(group_name): frame_dir / row["frame_filename"]
         for group_name, row in df.groupby("frame").first().iterrows()
     }
-    output_csv_file = data_dir / (df.loc[0, "video_name"] + "_detections_tagged.csv")
+    output_csv_file = data_dir / (df.loc[0, "video_name"] + f"_detections{suffix}.csv")
     return df, img_path, output_csv_file
 
 

@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from buzzid.identify.tag_reader import process_tag_detection
+from buzzid.timestamp_reader import add_timestamps_to_dataframe
 
 
 class PostProcessor:
@@ -15,11 +16,13 @@ class PostProcessor:
         self.data = data
         self.data_dir = data_dir
 
-    def process(self, tag_apply_to_tracks=True, tag_save_csv=True):
+    def process(self, tag_apply_to_tracks=True, tag_save_csv=True, read_timestamps=True):
         """Process output."""
         # Call the tag detection processing function
         self.data = process_tag_detection(self.data, data_dir=self.data_dir, apply_to_tracks=tag_apply_to_tracks, save_csv=tag_save_csv)
 
+        if read_timestamps:
+            self.data = add_timestamps_to_dataframe(self.data, data_dir=self.data_dir)
         return self.data
 
 

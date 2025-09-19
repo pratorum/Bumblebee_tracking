@@ -29,6 +29,7 @@ dependencies = [
     "ultralytics>=8.0.0",
     "pandas>=2.0.0",
     "tqdm",
+    "easyocr",
 ]
 
 [project.scripts]
