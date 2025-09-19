@@ -1,7 +1,7 @@
 # bumblebee-tracking
 Tracking and monitoring behaviour of bumblebees with QR codes and YOLO detection algorithm
 
-![a stylised bumblebee with a QR-code tag](image/buzzid.jpg)
+![a stylised bumblebee with a QR-code tag](image/buzz_id.jpg)
 
 ## Installation
 To install, use:
