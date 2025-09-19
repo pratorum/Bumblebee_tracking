@@ -6,7 +6,7 @@ Tracking and monitoring behaviour of bumblebees with QR codes and YOLO deteciton
 We recommend you use this library in a virtual environment:
 
 ```bash
-python3 -m venv venv
+python -m venv venv
 ```
 
 To activate the environment, use:
