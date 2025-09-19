@@ -57,6 +57,7 @@ packages = [
     "buzzid.detect",
     "buzzid.identify",
     "buzzid.annotate",
+    "buzzid.timestamp_reader"
     ]
 include-package-data = true
 
