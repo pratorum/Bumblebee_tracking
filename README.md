@@ -1,5 +1,7 @@
 # BuzzID
-Tracking and monitoring behaviour of bumblebees with QR codes and YOLO deteciton algorithm
+Tracking and monitoring behaviour of bumblebees with QR codes and YOLO detection algorithm
+
+![a stylised bumblebee with a QR-code tag](images/buzz_id1.png)
 
 ## Installation
 
