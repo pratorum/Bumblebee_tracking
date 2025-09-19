@@ -4,11 +4,8 @@ import argparse
 import os
 import sys
 
-# TODO: make modules for different processes
 from buzzid.detect.models import BeeDetector
 from buzzid.detect.processing import Analyzer, PostProcessor
-
-# TODO: set protocol for beetracking with args and --help
 
 
 class BeeDetectorApp:
