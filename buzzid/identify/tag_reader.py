@@ -21,8 +21,6 @@ def detect_tags_with_rotations(gray: np.ndarray, n_rotatations: int, print: bool
         tags = []
         for alpha in np.linspace(0, 90, n_rotatations):
             gray_rot = sp.ndimage.rotate(gray, alpha, mode="nearest", order=5).astype(np.uint8)
-            if gray_rot.size == 0 or gray_rot.shape[0] < 2 or gray_rot.shape[1] < 2:
-                continue
             tags_candidate = detector.detect(gray_rot)
             if len(tags_candidate) > 0:
                 if tags_candidate[0].decision_margin > confidence:
