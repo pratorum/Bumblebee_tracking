@@ -15,7 +15,7 @@ pip install git+https://github.com/pratorum/Bumblebee_tracking.git
 To use the detection algorithm, simply parse your video file to the CLI as below:
 
 ```python
-python3 -m bumblebee_tracking.detect_bees --video <path-to-video>
+python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --conf-thresh <thresh-value> --iou-thresh <thresh-value>
 ```
 
 To test with an example video, use `python3 -m bumblebee_tracking.detect_bees --video test`
