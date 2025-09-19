@@ -31,13 +31,8 @@ pip install git+https://github.com/pratorum/buzzid.git
 
 To use the detection algorithm, simply parse your video file to the CLI as below:
 
-<<<<<<< HEAD
-```bash
-buzzid --video <path-to-video>
-=======
 ```python
 python3 -m bumblebee_tracking.detect_bees --video <path-to-video> --conf-thresh <thresh-value> --iou-thresh <thresh-value>
->>>>>>> development
 ```
 
 **Alternatively**, test with an example video:
