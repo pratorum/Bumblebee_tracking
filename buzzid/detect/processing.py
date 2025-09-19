@@ -5,8 +5,8 @@ from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from bumblebee_tracking.qr_identifier.tag_reader import process_tag_detection
-from bumblebee_tracking.timestamp_reader.timestamp_reader import add_timestamps_to_dataframe
+from buzzid.identify.tag_reader import process_tag_detection
+from buzzid.timestamp_reader.timestamp_reader import add_timestamps_to_dataframe
 
 
 class PostProcessor:

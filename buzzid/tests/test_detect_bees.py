@@ -1,7 +1,7 @@
 """Tests for detect_bees.py"""
 
 import pytest
-from bumblebee_tracking.detect_bees import BeeDetectorApp
+from buzzid.detect_bees import BeeDetectorApp
 
 
 class TestBeeDetectorApp:

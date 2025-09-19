@@ -9,7 +9,7 @@ import pandas as pd
 from tqdm import tqdm
 from pathlib import Path
 
-from bumblebee_tracking.qr_identifier.tag_reader import load_detection, get_image
+from buzzid.identify.tag_reader import load_detection, get_image
 
 class TimestampExtractor:
 	def __init__(self, lang_list=['en'], gpu=False):

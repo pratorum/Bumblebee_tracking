@@ -4,9 +4,8 @@ import argparse
 import os
 import sys
 
-# TODO: make modules for different processes
-from bumblebee_tracking.detector.models import BeeDetector
-from bumblebee_tracking.detector.processing import Analyzer, PostProcessor
+from buzzid.detect.models import BeeDetector
+from buzzid.detect.processing import Analyzer, PostProcessor
 
 
 class BeeDetectorApp:
@@ -14,6 +13,12 @@ class BeeDetectorApp:
 
     def __init__(self):
         self.args = self.parse_args()
+
+    @staticmethod
+    def _get_data(path):
+        """Private function to fix path for package data."""
+        _ROOT = os.path.abspath(os.path.dirname(__file__))
+        return os.path.join(_ROOT, path)
 
     def parse_args(self):
         """argument parser for CLI."""
@@ -25,7 +30,7 @@ class BeeDetectorApp:
             "--model",
             "-m",
             type=str,
-            default="bumblebee_tracking/detector/trained_model.pt",
+            default=self._get_data("detect/trained_model.pt"),
             help="Path to the YOLO model weights file, defaults to pre-trained model",
         )
         parser.add_argument(
@@ -49,20 +54,14 @@ class BeeDetectorApp:
             default="outputs/",
             help="Directory to save output results (frames, video, etc.)",
         )
-        parser.add_argument(
-            "--show",
-            "-s",
-            action="store_true",
-            help="Display the video with detections while processing",
-        )
-        parser.add_argument("--analyze", "-a", default=True, help="Perfrom statistical analysis ")
+        parser.add_argument("--analyze", "-a", action="store_true", help="Perfrom statistical analysis on results")
         return parser.parse_args()
 
     def validate_args(self):
         """Check that input arguments are valid."""
         # Sorry for this horrible hack
         if self.args.video == "test":
-            self.args.video = "bumblebee_tracking/detector/example_video.mp4"
+            self.args.video = self._get_data("detect/example_video.mp4")
 
         if not os.path.isfile(self.args.video):
             print(f"Video file not found: {self.args.video}")
@@ -83,8 +82,6 @@ class BeeDetectorApp:
         print(f"Confidence threshold: {self.args.conf_thresh}")
         print(f"NMS IoU threshold: {self.args.iou_thresh}")
         print(f"Output directory: {self.args.output}")
-        if self.args.show:
-            print("Display enabled: Will show video while processing")
 
         detector = BeeDetector(model_path=self.args.model, video_path=self.args.video, conf_thresh=self.args.conf_thresh, iou_thresh=self.args.iou_thresh)
         detector.track_bees_in_video()
@@ -94,8 +91,11 @@ class BeeDetectorApp:
         if self.args.analyze:
             analyzer = Analyzer(df=processor.data, output_dir=self.args.output)
             analyzer.analyze()
+        
+        print(f"Detection complete! Output files saved to {self._get_data(self.args.output)}")
 
 
-if __name__ == "__main__":
+def main():
+    """Function to be run as 'buzzid' in pyproject.toml"""
     app = BeeDetectorApp()
     app.run()
